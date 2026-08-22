@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ─────────────────────────────────────────────────────────── */
+:root {
+  /* Paper Palette */
+  --paper:         #FAF6F0;
+  --paper-raised:  #FFFFFF;
+  --sidebar-bg:    #F7F2EA;
+  --ink-900:       #1B1611;
+  --ink-700:       #3D362E;
+  --ink-500:       #8A8072;
+  --ink-300:       #B8AD9C;
+  --border:        #EAE2D6;
+  --border-soft:   #F0EAE0;
+
+  /* Brand Green */
+  --green:         #128A52;
+  --green-deep:    #0E703F;
+  --green-tint:    #E6F4EB;
+
+  /* Accents */
+  --tan-100:       #EFDBC2;
+  --mint-100:      #DEF0E5;
+  --credits-bg:    #F2E3D8;
+
+  /* Status */
+  --fail-bg:       #FBE2E1;
+  --fail-text:     #C94A3F;
+  --ready-bg:      #E1F5E8;
+  --ready-text:    #128A52;
+  --pending-bg:    #FBF0D3;
+  --pending-text:  #A9822E;
+
+  /* ── Aliases used by the dashboard Tailwind classes ───────────────────── */
+  /* surfaces */
+  --surface-0:     #FAF6F0;   /* = --paper        */
+  --surface-1:     #FFFFFF;   /* = --paper-raised */
+  --surface-2:     #F7F2EA;   /* = --sidebar-bg   */
+
+  /* brand aliases */
+  --brand-50:      #E6F4EB;
+  --brand-100:     #DEF0E5;
+  --brand-500:     #128A52;
+  --brand-600:     #0E703F;
+  --brand-700:     #0B5B33;
+
+  /* warning / danger */
+  --warning-bg:    #FBF0D3;
+  --warning:       #A9822E;
+  --danger-bg:     #FBE2E1;
+  --danger:        #C94A3F;
+}
+
+/* ─── Base typography ────────────────────────────────────────────────────────── */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--ink-900);
+  background-color: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-900);
+}
+
+.font-mono, code {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* ─── Scroll reveal ──────────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
