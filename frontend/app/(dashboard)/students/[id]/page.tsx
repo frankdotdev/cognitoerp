@@ -1,5 +1,7 @@
 "use client";
 
+declare const process: { env: Record<string, string | undefined> };
+
 /**
  * Student profile — tabbed Information/Attendance/Results/Fees, plus the
  * real-world lifecycle management the product needed: a status action
