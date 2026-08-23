@@ -83,7 +83,7 @@ export default function ParentDashboardPage() {
 
   const { data: childInvoices, isLoading: invoicesLoading } = useQuery<Invoice[]>({
     queryKey: ["child-invoices", currentChildId],
-    queryFn: () => apiClient.get(`/finance/invoices`, { params: { student_id: currentChildId } }),
+    queryFn: () => apiClient.get(`/finance/invoices`, { params: { student_id: currentChildId || undefined } }),
     enabled: !!currentChildId,
   });
 
