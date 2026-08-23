@@ -207,7 +207,7 @@ export default function MarkAttendancePage() {
                       }`}
                       aria-label={STATUS_CONFIG[status].label}
                     >
-                      <span className="sm:hidden">{status[0].toUpperCase()}</span>
+                      <span className="sm:hidden">{status.charAt(0).toUpperCase()}</span>
                       <span className="hidden sm:inline">{STATUS_CONFIG[status].label}</span>
                     </button>
                   );

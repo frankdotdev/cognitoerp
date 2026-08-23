@@ -13,13 +13,13 @@ interface ApprovalItem {
   created_at: string;
 }
 
-const TYPE_CONFIG = {
+const TYPE_CONFIG: Record<ApprovalItem["type"], { icon: typeof Users; label: string; endpoint: (id: string) => string }> = {
   parent_link: { icon: Users, label: "Parent link", endpoint: (id: string) => `/parents/children/links/${id}/approve` },
   purchase_request: { icon: Package, label: "Purchase request", endpoint: (id: string) => `/inventory/purchase-requests/${id}/approve` },
   leave_request: { icon: Calendar, label: "Leave request", endpoint: (id: string) => `/hr/leave-requests/${id}/approve` },
 };
 
-const REJECT_ENDPOINTS: Record<string, (id: string) => string | null> = {
+const REJECT_ENDPOINTS: Record<ApprovalItem["type"], (id: string) => string | null> = {
   parent_link: () => null, // no reject path built for parent links yet — only approve exists
   purchase_request: (id) => `/inventory/purchase-requests/${id}/reject`,
   leave_request: (id) => `/hr/leave-requests/${id}/reject`,
@@ -40,7 +40,8 @@ export default function ApprovalsPage() {
 
   const reject = useMutation({
     mutationFn: (item: ApprovalItem) => {
-      const endpoint = REJECT_ENDPOINTS[item.type](item.id);
+      const rejectFn = REJECT_ENDPOINTS[item.type];
+      const endpoint = rejectFn ? rejectFn(item.id) : null;
       if (!endpoint) throw new Error("No reject action available for this type");
       return apiClient.post(endpoint);
     },
@@ -65,7 +66,8 @@ export default function ApprovalsPage() {
           {(approvals ?? []).map((item) => {
             const config = TYPE_CONFIG[item.type];
             const Icon = config.icon;
-            const canReject = REJECT_ENDPOINTS[item.type](item.id) !== null;
+            const rejectFn = REJECT_ENDPOINTS[item.type];
+            const canReject = rejectFn ? rejectFn(item.id) !== null : false;
             return (
               <div key={item.id} className="bg-surface-1 border border-border rounded-[10px] p-4 flex items-center gap-3">
                 <div className="w-9 h-9 rounded-md bg-surface-0 flex items-center justify-center shrink-0">
