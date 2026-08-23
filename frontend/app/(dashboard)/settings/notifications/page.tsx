@@ -46,7 +46,7 @@ export default function NotificationPreferencesPage() {
 
       <div className="max-w-lg flex flex-col gap-3">
         {CATEGORIES.map((cat) => {
-          const pref = prefs[cat.key];
+          const pref = prefs[cat.key] ?? { channel: "in_app" as Channel, enabled: true };
           return (
             <div key={cat.key} className="bg-surface-1 border border-border rounded-[10px] p-4">
               <div className="flex items-start justify-between gap-3 mb-3">
