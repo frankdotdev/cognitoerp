@@ -26,9 +26,13 @@ export default function NotificationPreferencesPage() {
   });
 
   function updatePref(category: string, changes: Partial<{ channel: Channel; enabled: boolean }>) {
-    const next = { ...prefs[category], ...changes };
+    const current = prefs[category] ?? { channel: "in_app" as Channel, enabled: true };
+    const next: { channel: Channel; enabled: boolean } = {
+      channel: changes.channel ?? current.channel,
+      enabled: changes.enabled ?? current.enabled,
+    };
     setPrefs((prev) => ({ ...prev, [category]: next }));
-    save.mutate({ category, digest: "immediate", ...next } as never);
+    save.mutate({ category, ...next });
     setSavedKey(category);
     setTimeout(() => setSavedKey((k) => (k === category ? null : k)), 1500);
   }
