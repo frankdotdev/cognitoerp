@@ -132,7 +132,7 @@ export default function FeeStructurePage() {
                   </div>
                 ))}
                 <button
-                  onClick={() => generateInvoices.mutate({ class_name: className, term })}
+                  onClick={() => { if (className && term) generateInvoices.mutate({ class_name: className, term }); }}
                   disabled={generateInvoices.isPending}
                   className="text-[12px] font-medium text-brand-700 hover:underline mt-3 disabled:opacity-50"
                 >
