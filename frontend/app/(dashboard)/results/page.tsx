@@ -47,12 +47,12 @@ export default function ResultsPage() {
 
   const { data: teacherAssignments } = useQuery<TeacherAssignment[]>({
     queryKey: ["teacher-assignments"],
-    queryFn: () => apiClient.get("/teachers/me/assignments").catch(() => []),
+    queryFn: () => apiClient.get<TeacherAssignment[]>("/teachers/me/assignments").catch(() => []),
   });
 
   const { data: schoolClassesData } = useQuery<SchoolClass[]>({
     queryKey: ["school-classes"],
-    queryFn: () => apiClient.get("/schools/me/classes").catch(() => []),
+    queryFn: () => apiClient.get<SchoolClass[]>("/schools/me/classes").catch(() => []),
   });
 
   const availableClasses = useMemo(() => {
