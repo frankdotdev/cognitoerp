@@ -6,7 +6,9 @@
  * to fill in here — stubbed for now with a TODO rather than faked, since a
  * fake "it works" would hide the real auth wiring still needed.
  */
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1";
+declare const process: { env: Record<string, string | undefined> };
+
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1";
 
 interface RequestOptions {
   params?: Record<string, string | number | boolean | undefined>;

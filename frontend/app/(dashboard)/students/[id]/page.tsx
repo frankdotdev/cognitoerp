@@ -1,7 +1,5 @@
 "use client";
 
-declare const process: { env: Record<string, string | undefined> };
-
 /**
  * Student profile — tabbed Information/Attendance/Results/Fees, plus the
  * real-world lifecycle management the product needed: a status action
@@ -17,7 +15,7 @@ import { Download, ChevronDown } from "lucide-react";
 import { DashboardShell } from "@/components/shared/DashboardShell";
 import { FormSkeleton } from "@/components/shared/Skeleton";
 import { EntityPhotoUploader } from "@/components/shared/EntityPhotoUploader";
-import { apiClient } from "@/lib/api-client";
+import { apiClient, API_BASE_URL } from "@/lib/api-client";
 
 interface Student {
   id: string;
@@ -194,7 +192,7 @@ export default function StudentProfilePage() {
         </span>
         <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto justify-between sm:justify-start">
           <a
-            href={`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1"}/students/${studentId}/transcript.pdf`}
+            href={`${API_BASE_URL}/students/${studentId}/transcript.pdf`}
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-1.5 text-[12px] font-medium text-white/80 hover:text-white border border-white/20 rounded-md px-3 py-1.5"

@@ -9,6 +9,7 @@
  */
 import { useState, useRef } from "react";
 import { Upload, X, FileSpreadsheet, Loader2 } from "lucide-react";
+import { API_BASE_URL } from "@/lib/api-client";
 
 interface ImportResult {
   format_detected: string;
@@ -32,7 +33,7 @@ export function BulkResultsImportModal({ onClose, onImported }: { onClose: () =>
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1"}/results/bulk-import`, {
+      const res = await fetch(`${API_BASE_URL}/results/bulk-import`, {
         method: "POST",
         body: formData,
       });

@@ -9,7 +9,7 @@
  */
 import { useState, useRef } from "react";
 import { Upload, X, FileSpreadsheet, Loader2 } from "lucide-react";
-import { apiClient } from "@/lib/api-client";
+import { apiClient, API_BASE_URL } from "@/lib/api-client";
 
 interface ImportResult {
   total_rows: number;
@@ -34,7 +34,7 @@ export function BulkImportModal({ onClose, onImported }: { onClose: () => void; 
       formData.append("file", file);
 
       // Raw fetch, not apiClient — this is a multipart upload, not JSON.
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1"}/students/bulk-import`, {
+      const res = await fetch(`${API_BASE_URL}/students/bulk-import`, {
         method: "POST",
         body: formData,
       });
